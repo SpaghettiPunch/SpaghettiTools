@@ -1,4 +1,5 @@
 #include "DevNote.h"
+#include "Blueprint/UserWidget.h"
 #include "DevNoteData.h"
 
 #include "Async/TaskGraphInterfaces.h"
@@ -25,12 +26,13 @@ ADevNote::ADevNote()
 		struct FConstructorStatics
 		{
 			ConstructorHelpers::FObjectFinderOptional<UTexture2D> NoteTextureObject;
-			ConstructorHelpers::FObjectFinderOptional<UUserWidget> NoteUserWidget;
+			UClass* NoteUserWidget;
 			FName ID_Notes;
 			FText NAME_Notes;
 			FConstructorStatics()
 				: NoteTextureObject(TEXT("/Engine/EditorResources/S_Note"))
-				, NoteUserWidget(TEXT("WidgetBlueprint'/Notes/WP_WorldDevNote'"))
+				, NoteUserWidget(LoadClass<UUserWidget>(NULL, 
+					TEXT("WidgetBlueprint'/SpaghettiTools/Notes/WP_WorldDevNote.WP_WorldDevNote_C'")))
 				, ID_Notes(TEXT("Notes"))
 				, NAME_Notes(NSLOCTEXT("SpriteCategory", "Notes", "Notes"))
 			{
@@ -66,7 +68,7 @@ ADevNote::ADevNote()
 			WidgetComponent->SetupAttachment(RootComponent);
 			WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
 			WidgetComponent->SetVisibility(true);
-			// WidgetComponent->SetWidgetClass(ConstructorStatics.NoteUserWidget.Get());
+			WidgetComponent->SetWidgetClass(ConstructorStatics.NoteUserWidget);
 		}
 	}
 #endif // WITH_EDITORONLY_DATA
