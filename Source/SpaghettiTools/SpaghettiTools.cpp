@@ -1,9 +1,12 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SpaghettiTools.h"
+#include "ComponentVisualizer.h"
+#include "Editor/UnrealEdEngine.h"
 #include "SpaghettiToolsStyle.h"
 #include "SpaghettiToolsCommands.h"
 #include "LevelEditor.h"
+#include "UnrealEdGlobals.h"
 #include "Widgets/Docking/SDockTab.h"
 #include "Widgets/Layout/SBox.h"
 #include "Widgets/Text/STextBlock.h"
@@ -34,6 +37,7 @@ void FSpaghettiToolsModule::StartupModule()
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(NotesTabName, FOnSpawnTab::CreateRaw(this, &FSpaghettiToolsModule::OnSpawnPluginTab))
 		.SetDisplayName(LOCTEXT("FSpaghettiToolsNotesTabTitle", "Notes"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
+
 }
 
 void FSpaghettiToolsModule::ShutdownModule()
@@ -50,6 +54,7 @@ void FSpaghettiToolsModule::ShutdownModule()
 	FSpaghettiToolsCommands::Unregister();
 
 	FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(NotesTabName);
+
 }
 
 TSharedRef<SDockTab> FSpaghettiToolsModule::OnSpawnPluginTab(const FSpawnTabArgs& SpawnTabArgs)

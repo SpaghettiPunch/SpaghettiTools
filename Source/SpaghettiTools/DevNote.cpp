@@ -1,6 +1,5 @@
 #include "DevNote.h"
 #include "Blueprint/UserWidget.h"
-#include "DevNoteData.h"
 
 #include "Components/ArrowComponent.h"
 #include "Components/BillboardComponent.h"
@@ -17,7 +16,7 @@ ADevNote::ADevNote()
 #if WITH_EDITORONLY_DATA
 	ArrowComponent = CreateEditorOnlyDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
 	SpriteComponent = CreateEditorOnlyDefaultSubobject<UBillboardComponent>(TEXT("Sprite"));
-	WidgetComponent = CreateEditorOnlyDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
+	// WidgetComponent = CreateEditorOnlyDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
 
 	if (!IsRunningCommandlet())
 	{
@@ -62,13 +61,13 @@ ADevNote::ADevNote()
 			SpriteComponent->Mobility = EComponentMobility::Static;
 		}
 
-		if (WidgetComponent)
-		{
-			WidgetComponent->SetupAttachment(RootComponent);
-			WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
-			WidgetComponent->SetVisibility(true);
-			WidgetComponent->SetWidgetClass(ConstructorStatics.NoteUserWidget);
-		}
+		// if (WidgetComponent)
+		// {
+		// 	WidgetComponent->SetupAttachment(RootComponent);
+		// 	WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+		// 	WidgetComponent->SetVisibility(true);
+		// 	WidgetComponent->SetWidgetClass(ConstructorStatics.NoteUserWidget);
+		// }
 	}
 #endif // WITH_EDITORONLY_DATA
 

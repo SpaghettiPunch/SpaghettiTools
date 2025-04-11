@@ -16,25 +16,25 @@ class SPAGHETTITOOLS_API ADevNote: public AActor
 
 #if WITH_EDITORONLY_DATA
 
-private:
+protected:
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UBillboardComponent> SpriteComponent;
 
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UArrowComponent> ArrowComponent;
 
-	UPROPERTY(EditAnywhere)
-	TObjectPtr<class UWidgetComponent> WidgetComponent;
+	// UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	// TObjectPtr<class UWidgetComponent> WidgetComponent;
 
 public:
 	ADevNote();
 
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = Note)
-    TObjectPtr<class UDevNoteDataAsset> data;
+    TObjectPtr<class UDevNoteDataAsset> noteData;
 
 	class UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }
 	class UArrowComponent* GetArrowComponent() const { return ArrowComponent; }
-	class UWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
+	// class UWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
 
 #endif // WITH_EDITORONLY_DATA
 };

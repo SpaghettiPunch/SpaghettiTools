@@ -43,7 +43,8 @@ public class SpaghettiTools : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-				"UMG"
+				"UMG",
+				"ComponentVisualizers"	
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
