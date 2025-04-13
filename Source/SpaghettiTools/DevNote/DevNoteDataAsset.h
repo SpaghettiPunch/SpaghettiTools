@@ -2,20 +2,25 @@
 
 #pragma once
 
+#include "Containers/Array.h"
 #include "CoreMinimal.h"
+#include "DevNote.h"
 #include "Engine/DataAsset.h"
-#include "DevNoteData.generated.h"
+#include "DevNoteDataAsset.generated.h"
 
 USTRUCT(BlueprintType)
 struct FDevNoteData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Note")
 	FString Text;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	UTexture2D* Screenshot;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Note")
+	TArray<ADevNote*> anchors;
+
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	// UTexture2D* Screenshot;
 };
 
 /**
