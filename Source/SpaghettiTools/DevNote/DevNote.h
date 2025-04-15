@@ -28,7 +28,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;
 
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	/* AActor Interface */
+	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	void OnConstruction(const FTransform& Transform) override;
+
 	void UpdateWidgetState();
 
 	class UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }

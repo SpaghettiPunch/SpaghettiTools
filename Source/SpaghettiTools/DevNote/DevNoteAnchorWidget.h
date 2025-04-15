@@ -9,8 +9,11 @@ class SPAGHETTITOOLS_API UDevNoteAnchorWidget : public UUserWidget
 	GENERATED_BODY()
 
 public:
-	virtual void SynchronizeProperties() override;
-	void UpdateWidgetContent();
+
+	/* UUserWidget Interface */
+	void SynchronizeProperties() override;
+
+	void UpdateWidgetState();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;

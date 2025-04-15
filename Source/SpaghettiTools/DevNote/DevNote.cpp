@@ -49,9 +49,9 @@ ADevNote::ADevNote()
 		if (WidgetComponent)
 		{
 			WidgetComponent->SetupAttachment(RootComponent);
-			WidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+			WidgetComponent->SetWidgetSpace(EWidgetSpace::World);
 			WidgetComponent->SetVisibility(true);
-			// WidgetComponent->SetWidgetClass(ConstructorStatics.NoteUserWidget);
+			UpdateWidgetState();
 		}
 	}
 #endif	  // WITH_EDITORONLY_DATA
@@ -60,8 +60,15 @@ ADevNote::ADevNote()
 	SetCanBeDamaged(false);
 }
 
+void ADevNote::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	UpdateWidgetState();
+}
+
 void ADevNote::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
+	Super::PostEditChangeProperty(PropertyChangedEvent);
 	UpdateWidgetState();
 }
 
@@ -76,7 +83,7 @@ void ADevNote::UpdateWidgetState()
 			if (AnchorWidget && NoteData)
 			{
 				AnchorWidget->NoteData = NoteData;
-				AnchorWidget->UpdateWidgetContent();
+				AnchorWidget->UpdateWidgetState();
 			}
 		}
 	}

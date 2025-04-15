@@ -6,10 +6,10 @@
 void UDevNoteAnchorWidget::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
-	UpdateWidgetContent();
+	UpdateWidgetState();
 }
 
-void UDevNoteAnchorWidget::UpdateWidgetContent()
+void UDevNoteAnchorWidget::UpdateWidgetState()
 {
 	if (NoteData && NoteContentLabel)
 	{
