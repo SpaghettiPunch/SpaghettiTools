@@ -1,6 +1,6 @@
 #include "DevNote.h"
+#include "SpaghettiTools/ScalableWidgetComponent.h"
 #include "Components/BillboardComponent.h"
-#include "Components/WidgetComponent.h"
 #include "DevNoteAnchorWidget.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -12,7 +12,7 @@ ADevNote::ADevNote()
 
 #if WITH_EDITORONLY_DATA
 	SpriteComponent = CreateEditorOnlyDefaultSubobject<UBillboardComponent>(TEXT("Sprite"));
-	WidgetComponent = CreateEditorOnlyDefaultSubobject<UWidgetComponent>(TEXT("Widget"));
+	WidgetComponent = CreateEditorOnlyDefaultSubobject<UScalableWidgetComponent>(TEXT("Widget"));
 
 	if (!IsRunningCommandlet())
 	{

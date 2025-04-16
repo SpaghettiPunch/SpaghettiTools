@@ -20,7 +20,7 @@ protected:
 	TObjectPtr<class UBillboardComponent> SpriteComponent;
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<class UWidgetComponent> WidgetComponent;
+	TObjectPtr<class UScalableWidgetComponent> WidgetComponent;
 
 public:
 	ADevNote();
@@ -35,6 +35,6 @@ public:
 	void UpdateWidgetState();
 
 	class UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }
-	class UWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
+	class UScalableWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
 #endif // WITH_EDITORONLY_DATA
 };
