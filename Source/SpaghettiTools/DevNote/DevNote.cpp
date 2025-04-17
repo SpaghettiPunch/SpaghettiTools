@@ -88,8 +88,7 @@ void ADevNote::UpdateWidgetState()
 			UDevNoteAnchorWidget* const AnchorWidget = Cast<UDevNoteAnchorWidget>(Widget);
 			if (AnchorWidget && NoteData)
 			{
-				AnchorWidget->NoteData = NoteData;
-				AnchorWidget->UpdateWidgetState();
+				AnchorWidget->SetNoteData(NoteData);
 			}
 		}
 	}
