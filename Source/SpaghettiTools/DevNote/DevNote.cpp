@@ -74,6 +74,11 @@ void ADevNote::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
 
 void ADevNote::UpdateWidgetState()
 {
+	if (!bAutoUpdateNoteContent)
+	{
+		return;
+	}
+
 	if (WidgetComponent)
 	{
 		UUserWidget* Widget = WidgetComponent->GetWidget();

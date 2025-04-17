@@ -2,7 +2,7 @@
 #include "Widgets/SVirtualWindow.h"
 #include "Slate/WidgetRenderer.h"
 
-/* Copy of WidgetComponent code, but uses stored DrawScale variable instad of constant */
+/* Copy of WidgetComponent method, but uses DrawScale property variable instad of constant */
 void UScalableWidgetComponent::DrawWidgetToRenderTarget(float DeltaTime)
 {
 	if ( GUsingNullRHI )
@@ -110,3 +110,11 @@ void UScalableWidgetComponent::DrawWidgetToRenderTarget(float DeltaTime)
 
 	}
 }
+
+void UScalableWidgetComponent::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	if (bAutoCompensateWidgetScale)
+	{
+		SetRelativeScale3D(FVector(1.0f / DrawScale));
+	}
+};

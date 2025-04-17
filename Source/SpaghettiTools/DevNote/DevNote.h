@@ -28,6 +28,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Debug)
+    bool bAutoUpdateNoteContent;
+
 	/* AActor Interface */
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 	void OnConstruction(const FTransform& Transform) override;
