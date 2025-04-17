@@ -1,4 +1,5 @@
 #include "DevNoteAnchorWidget.h"
+#include "Components/SlateWrapperTypes.h"
 #include "DevNoteDataAsset.h"
 
 #include "Components/TextBlock.h"
@@ -11,8 +12,22 @@ void UDevNoteAnchorWidget::SynchronizeProperties()
 
 void UDevNoteAnchorWidget::UpdateWidgetState()
 {
-	if (NoteData && NoteContentLabel)
-	{
-		NoteContentLabel->SetText(FText::FromString(NoteData->noteData.Text));
-	}
+	UpdateTextBlock(NoteTitle, NoteData->noteData.Title);
+	UpdateTextBlock(NoteContent, NoteData->noteData.Text);
 }
+
+
+void UDevNoteAnchorWidget::UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString Text)
+{
+	if (!TextBlock) {
+		return;
+	}
+
+	if (Text.IsEmpty())
+	{
+		TextBlock->SetVisibility(ESlateVisibility::Collapsed);
+	} else {
+		TextBlock->SetText(FText::FromString(Text));
+		TextBlock->SetVisibility(ESlateVisibility::Visible);
+	}
+};

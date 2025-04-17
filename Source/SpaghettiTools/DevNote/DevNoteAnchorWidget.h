@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "UObject/ObjectPtr.h"
 #include "DevNoteAnchorWidget.generated.h"
 
 UCLASS(Blueprintable, Abstract)
@@ -19,5 +20,11 @@ public:
     TObjectPtr<class UDevNoteDataAsset> NoteData;
 
 	UPROPERTY(BlueprintReadWrite, Category = Note, meta=(BindWidget))
-	TObjectPtr<class UTextBlock> NoteContentLabel;
+	TObjectPtr<class UTextBlock> NoteContent;
+
+	UPROPERTY(BlueprintReadWrite, Category = Note, meta=(BindWidget))
+	TObjectPtr<class UTextBlock> NoteTitle;
+
+protected:
+	static void UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString text);
 };

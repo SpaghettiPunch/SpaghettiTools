@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Containers/Array.h"
-#include "CoreMinimal.h"
 #include "DevNote.h"
 #include "Engine/DataAsset.h"
 #include "DevNoteDataAsset.generated.h"
@@ -12,6 +11,9 @@ USTRUCT(BlueprintType)
 struct FDevNoteData
 {
 	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Note")
+	FString Title;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Note")
 	FString Text;
@@ -34,4 +36,7 @@ class SPAGHETTITOOLS_API UDevNoteDataAsset : public UDataAsset
 	public:
 		UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Note")
 		FDevNoteData noteData;
-};
+
+		/** UObject Interface */
+		void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+};		

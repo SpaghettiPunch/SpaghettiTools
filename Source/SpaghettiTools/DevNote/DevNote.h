@@ -28,7 +28,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Debug)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     bool bAutoUpdateNoteContent;
 
 	/* AActor Interface */

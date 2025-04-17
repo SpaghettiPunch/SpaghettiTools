@@ -51,12 +51,13 @@ ADevNote::ADevNote()
 			WidgetComponent->SetupAttachment(RootComponent);
 			WidgetComponent->SetWidgetSpace(EWidgetSpace::World);
 			WidgetComponent->SetVisibility(true);
+			WidgetComponent->SetCastShadow(false);
 			UpdateWidgetState();
 		}
 	}
 #endif	  // WITH_EDITORONLY_DATA
 
-	SetHidden(true);
+	SetHidden(false);
 	SetCanBeDamaged(false);
 }
 
