@@ -52,7 +52,11 @@ ADevNote::ADevNote()
 			WidgetComponent->SetWidgetSpace(EWidgetSpace::World);
 			WidgetComponent->SetVisibility(true);
 			WidgetComponent->SetCastShadow(false);
-			UpdateWidgetState();
+
+			if (bAutoUpdateNoteContent)
+			{
+				UpdateWidgetState();
+			}
 		}
 	}
 #endif	  // WITH_EDITORONLY_DATA
@@ -64,22 +68,25 @@ ADevNote::ADevNote()
 void ADevNote::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
-	UpdateWidgetState();
+
+	if (bAutoUpdateNoteContent)
+	{
+		UpdateWidgetState();
+	}
 }
 
 void ADevNote::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
-	UpdateWidgetState();
+
+	if (bAutoUpdateNoteContent)
+	{
+		UpdateWidgetState();
+	}
 }
 
 void ADevNote::UpdateWidgetState()
 {
-	if (!bAutoUpdateNoteContent)
-	{
-		return;
-	}
-
 	if (WidgetComponent)
 	{
 		UUserWidget* Widget = WidgetComponent->GetWidget();
@@ -89,6 +96,7 @@ void ADevNote::UpdateWidgetState()
 			if (AnchorWidget && NoteData)
 			{
 				AnchorWidget->SetNoteData(NoteData);
+				AnchorWidget->bAutoUpdateNoteContent = bAutoUpdateNoteContent;
 			}
 		}
 	}

@@ -45,6 +45,7 @@ public class SpaghettiTools : ModuleRules
 				"SlateCore",
 				"UMG",
 				"RHI",
+				"Blutility",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

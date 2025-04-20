@@ -7,7 +7,11 @@
 void UDevNoteAnchorWidget::SynchronizeProperties()
 {
 	Super::SynchronizeProperties();
-	UpdateWidgetState();
+
+	if (bAutoUpdateNoteContent)
+	{
+		UpdateWidgetState();
+	}
 }
 
 void UDevNoteAnchorWidget::SetNoteData(TObjectPtr<class UDevNoteDataAsset> NewNoteData)
@@ -17,20 +21,20 @@ void UDevNoteAnchorWidget::SetNoteData(TObjectPtr<class UDevNoteDataAsset> NewNo
 		return;
 	}
 
-	if (NoteData && NoteDataUpdateHandle.IsValid())
+	if (NoteData)
 	{
-		NoteData->OnChanged().Remove(NoteDataUpdateHandle);
+		NoteData->OnChange().RemoveDynamic(this, &UDevNoteAnchorWidget::UpdateWidgetState);
 	}
 
 	NoteData = NewNoteData;
-	NoteDataUpdateHandle = NoteData->OnChanged().AddUObject(this, &UDevNoteAnchorWidget::UpdateWidgetState);
+	NoteData->OnChange().AddUniqueDynamic(this, &UDevNoteAnchorWidget::UpdateWidgetState);
 	UpdateWidgetState();
 }
 
 void UDevNoteAnchorWidget::UpdateWidgetState()
 {
-	UpdateTextBlock(NoteTitle, NoteData->noteData.Title);
-	UpdateTextBlock(NoteContent, NoteData->noteData.Text);
+	UpdateTextBlock(NoteTitle, NoteData->NoteData.Title);
+	UpdateTextBlock(NoteContent, NoteData->NoteData.Text);
 }
 
 void UDevNoteAnchorWidget::UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString Text)

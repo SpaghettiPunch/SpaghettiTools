@@ -3,7 +3,6 @@
 #include "Blueprint/UserWidget.h"
 #include "DevNoteDataAsset.h"
 #include "UObject/ObjectPtr.h"
-#include "UObject/SoftObjectPtr.h"
 #include "DevNoteAnchorWidget.generated.h"
 
 UCLASS(Blueprintable, Abstract)
@@ -15,7 +14,8 @@ public:
 
 	/* UUserWidget Interface */
 	void SynchronizeProperties() override;
-
+	
+	UFUNCTION()
 	void UpdateWidgetState();
 
 	UPROPERTY(BlueprintReadWrite, Category = Note, meta=(BindWidget))
@@ -25,13 +25,17 @@ public:
 	TObjectPtr<class UTextBlock> NoteTitle;
 
 	void SetNoteData(TObjectPtr<class UDevNoteDataAsset> NoteData);
-	TSoftObjectPtr<class UDevNoteDataAsset> GetNoteData() { return NoteData; }
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
+    bool bAutoUpdateNoteContent;
+
 
 protected:
 	static void UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString text);
 
 private:
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter="SetNoteData", Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;
+
 	FDelegateHandle NoteDataUpdateHandle;	
 };

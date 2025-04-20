@@ -31,11 +31,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
     bool bAutoUpdateNoteContent;
 
+	UFUNCTION(CallInEditor, Category = Note)
+	void UpdateWidgetState();
+
 	/* AActor Interface */
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 	void OnConstruction(const FTransform& Transform) override;
-
-	void UpdateWidgetState();
 
 	class UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }
 	class UScalableWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }

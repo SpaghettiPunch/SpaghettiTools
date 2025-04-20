@@ -4,7 +4,10 @@
 
 #include "Containers/Array.h"
 #include "DevNote.h"
+#include "Editor.h"
 #include "Engine/DataAsset.h"
+#include "UObject/ObjectPtr.h"
+#include "UObject/SoftObjectPtr.h"
 #include "DevNoteDataAsset.generated.h"
 
 USTRUCT(BlueprintType)
@@ -20,7 +23,10 @@ struct FDevNoteData
 	FString Text;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
-	TArray<ADevNote*> anchors;
+	TSoftObjectPtr<ADevNote> Anchor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
+	TArray<TSoftObjectPtr<AActor>> RelatedActors;
 
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	// UTexture2D* Screenshot;
@@ -37,7 +43,7 @@ class SPAGHETTITOOLS_API UDevNoteDataAsset : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Note")
-	FDevNoteData noteData;
+	FDevNoteData NoteData;
 
 	/** UObject Interface */
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override 
@@ -46,18 +52,55 @@ public:
 		BroadcastChangedEvent();
 	}
 
-	/** Broadcasts whenever the data changes */
-	DECLARE_EVENT(UDevNoteDataAsset, FChangedEvent)
-	FChangedEvent& OnChanged()
+
+#if WITH_EDITORONLY_DATA
+	void SelectRelatedActors()
 	{
-		return ChangedEvent;
+		for (TSoftObjectPtr<AActor> RelatedActor : NoteData.RelatedActors)
+		{
+			if (RelatedActor.IsValid())
+			{
+				GEditor->SelectActor(RelatedActor.Get(), true, false);
+			}
+		}
 	}
 
-private:
+	UFUNCTION(CallInEditor, Category = "Note")
+	void MoveCameraToNote()
+	{
+		TArray<AActor*> ActorGroup = {};
+
+		for (TSoftObjectPtr<AActor> RelatedActor: NoteData.RelatedActors)
+		{
+			if (RelatedActor.IsValid())
+			{
+				ActorGroup.Add(RelatedActor.Get());
+			}
+		}
+
+		if (NoteData.Anchor.IsValid())
+		{
+			ActorGroup.Add(NoteData.Anchor.Get());
+		}
+
+		GEditor->MoveViewportCamerasToActor(ActorGroup, true);
+		SelectRelatedActors();
+	}
+#endif
+
+	/** Broadcasts whenever the data changes */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangedEventDelegate);
+	/** Broadcasts whenever the data changes */
+	FChangedEventDelegate OnChange() {
+		return OnChangeDelegate;
+	}
+
+protected:
+	/** Broadcasts whenever the data changes */
+	FChangedEventDelegate OnChangeDelegate;
+
 	void BroadcastChangedEvent()
 	{
-		ChangedEvent.Broadcast();
+		OnChangeDelegate.Broadcast();
 	}
-	/** Broadcasts whenever the data changes */
-	FChangedEvent ChangedEvent;
 };
