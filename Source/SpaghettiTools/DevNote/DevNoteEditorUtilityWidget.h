@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EditorUtilityWidget.h"
+#include "UObject/ObjectPtr.h"
 #include "DevNoteEditorUtilityWidget.generated.h"
 
 UCLASS()
@@ -11,5 +12,9 @@ public:
 	/* UUserWidget Interface */
 	void SynchronizeProperties() override;
 
-    TArray<TSoftObjectPtr<class UDevNoteDataAsset>> Notes;
+	UPROPERTY(BlueprintReadOnly, Category = "Notes", meta=(BindWidget))
+	TObjectPtr<class UPanelWidget> NotesList;
+
+	UPROPERTY(EditAnywhere, Category=Notes)
+	TSubclassOf<UUserWidget> NoteWidgetClass;
 };
