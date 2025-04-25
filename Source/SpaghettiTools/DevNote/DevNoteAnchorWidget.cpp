@@ -1,8 +1,8 @@
 #include "DevNoteAnchorWidget.h"
 #include "Components/SlateWrapperTypes.h"
 #include "DevNoteDataAsset.h"
-
 #include "Components/TextBlock.h"
+#include "SpaghettiTools/WidgetUtilities.h"
 
 void UDevNoteAnchorWidget::SynchronizeProperties()
 {
@@ -33,24 +33,6 @@ void UDevNoteAnchorWidget::SetNoteData(TObjectPtr<class UDevNoteDataAsset> NewNo
 
 void UDevNoteAnchorWidget::UpdateWidgetState()
 {
-	UpdateTextBlock(NoteTitle, NoteData->NoteData.Title);
-	UpdateTextBlock(NoteContent, NoteData->NoteData.Text);
+	WidgetUtilities::UpdateTextBlock(NoteTitle, NoteData->NoteData.Title);
+	WidgetUtilities::UpdateTextBlock(NoteContent, NoteData->NoteData.Text);
 }
-
-void UDevNoteAnchorWidget::UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString Text)
-{
-	if (!TextBlock)
-	{
-		return;
-	}
-
-	if (Text.IsEmpty())
-	{
-		TextBlock->SetVisibility(ESlateVisibility::Collapsed);
-	}
-	else
-	{
-		TextBlock->SetText(FText::FromString(Text));
-		TextBlock->SetVisibility(ESlateVisibility::Visible);
-	}
-};

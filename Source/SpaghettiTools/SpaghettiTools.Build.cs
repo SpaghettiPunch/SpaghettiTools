@@ -46,6 +46,7 @@ public class SpaghettiTools : ModuleRules
 				"UMG",
 				"RHI",
 				"Blutility",
+				"ScriptableEditorWidgets",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

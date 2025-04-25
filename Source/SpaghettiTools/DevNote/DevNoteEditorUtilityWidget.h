@@ -12,9 +12,15 @@ public:
 	/* UUserWidget Interface */
 	void SynchronizeProperties() override;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Notes", meta=(BindWidget))
+	UFUNCTION(CallInEditor, Category=Debug)
+	void UpdateWidget();
+
+	UPROPERTY(EditAnywhere, Category=Debug)
+	bool bAutoUpdateWidgetOnSynchronizeProperties = true;
+
+	UPROPERTY(BlueprintReadOnly, Category=Notes, meta=(BindWidget))
 	TObjectPtr<class UPanelWidget> NotesList;
 
 	UPROPERTY(EditAnywhere, Category=Notes)
-	TSubclassOf<UUserWidget> NoteWidgetClass;
+	TSubclassOf<class UDevNoteEditorUtilityWidgetItem> NoteItemWidgetClass;
 };

@@ -6,7 +6,6 @@
 #include "DevNote.h"
 #include "Editor.h"
 #include "Engine/DataAsset.h"
-#include "UObject/ObjectPtr.h"
 #include "UObject/SoftObjectPtr.h"
 #include "DevNoteDataAsset.generated.h"
 
@@ -16,16 +15,16 @@ struct FDevNoteData
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Title;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Text;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftObjectPtr<ADevNote> Anchor;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Note")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<AActor>> RelatedActors;
 
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -65,7 +64,7 @@ public:
 		}
 	}
 
-	UFUNCTION(CallInEditor, Category = "Note")
+	UFUNCTION(CallInEditor, Category = "Note Actions")
 	void MoveCameraToNote()
 	{
 		TArray<AActor*> ActorGroup = {};

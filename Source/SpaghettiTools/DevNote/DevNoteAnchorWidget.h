@@ -36,6 +36,4 @@ protected:
 private:
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, BlueprintSetter="SetNoteData", Category = Note)
     TObjectPtr<class UDevNoteDataAsset> NoteData;
-
-	FDelegateHandle NoteDataUpdateHandle;	
 };

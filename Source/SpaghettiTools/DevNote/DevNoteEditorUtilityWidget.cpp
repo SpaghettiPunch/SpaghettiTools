@@ -1,15 +1,27 @@
 
 #include "DevNoteEditorUtilityWidget.h"
+#include "DevNoteEditorUtilityWidgetItem.h"
+#include "AssetRegistry/AssetRegistryModule.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/PanelWidget.h"
 #include "DevNoteDataAsset.h"
 #include "Modules/ModuleManager.h"
-#include "AssetRegistry/AssetRegistryModule.h"
 #include "Templates/Casts.h"
-#include "Components/PanelWidget.h"
 
 void UDevNoteEditorUtilityWidget::SynchronizeProperties()
 {
-	if (!NotesList) {
+	Super::SynchronizeProperties();
+
+	if (bAutoUpdateWidgetOnSynchronizeProperties)
+	{
+		UpdateWidget();
+	}
+}
+
+void UDevNoteEditorUtilityWidget::UpdateWidget()
+{
+	if (!NotesList)
+	{
 		return;
 	}
 
@@ -25,13 +37,17 @@ void UDevNoteEditorUtilityWidget::SynchronizeProperties()
 		if (UObject* AssetObject = Asset.FastGetAsset())
 		{
 			if (UDevNoteDataAsset* NoteDataAsset = CastChecked<UDevNoteDataAsset>(AssetObject))
-				if (NoteWidgetClass)
-				{
-					NoteWidgetClass.GetClass()* NoteWidget = CreateWidget<NoteWidgetClass>(GetWorld(), NoteWidgetClass);
-
-					NotesList->AddChild(NoteWidget);
-				}
 			{
+				if (NoteItemWidgetClass)
+				{
+					UUserWidget* NewWidget = CreateWidget(GetWorld(), NoteItemWidgetClass);
+					if (UDevNoteEditorUtilityWidgetItem* ItemWidget = CastChecked<UDevNoteEditorUtilityWidgetItem>(NewWidget)) 
+					{
+						ItemWidget->NoteData = NoteDataAsset;
+						NotesList->AddChild(NewWidget);
+					}
+				}
+			}
 		}
 	}
 }
