@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
-#include "DevNoteDataAsset.h"
 #include "UObject/ObjectPtr.h"
 #include "DevNoteAnchorWidget.generated.h"
 
@@ -20,9 +19,6 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = Note, meta=(BindWidget))
 	TObjectPtr<class UTextBlock> NoteContent;
-
-	UPROPERTY(BlueprintReadWrite, Category = Note, meta=(BindWidget))
-	TObjectPtr<class UTextBlock> NoteTitle;
 
 	void SetNoteData(TObjectPtr<class UDevNoteDataAsset> NoteData);
 

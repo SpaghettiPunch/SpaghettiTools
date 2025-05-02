@@ -16,9 +16,6 @@ struct FDevNoteData
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FString Title;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FString Text;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -41,6 +38,11 @@ class SPAGHETTITOOLS_API UDevNoteDataAsset : public UDataAsset
 	GENERATED_BODY()
 
 public:
+	/** Broadcasts whenever the data changes */
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangedEventDelegate);
+	/** Broadcasts whenever the data changes */
+	FChangedEventDelegate OnChange;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Note")
 	FDevNoteData NoteData;
 
@@ -48,11 +50,12 @@ public:
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override 
 	{
 		Super::PostEditChangeProperty(PropertyChangedEvent);
-		BroadcastChangedEvent();
+		OnChange.Broadcast();
 	}
 
 
 #if WITH_EDITORONLY_DATA
+	UFUNCTION(BlueprintCallable, Category = "Note Actions")
 	void SelectRelatedActors()
 	{
 		for (TSoftObjectPtr<AActor> RelatedActor : NoteData.RelatedActors)
@@ -64,7 +67,7 @@ public:
 		}
 	}
 
-	UFUNCTION(CallInEditor, Category = "Note Actions")
+	UFUNCTION(BlueprintCallable, Category = "Note Actions")
 	void MoveCameraToNote()
 	{
 		TArray<AActor*> ActorGroup = {};
@@ -86,20 +89,4 @@ public:
 		SelectRelatedActors();
 	}
 #endif
-
-	/** Broadcasts whenever the data changes */
-	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FChangedEventDelegate);
-	/** Broadcasts whenever the data changes */
-	FChangedEventDelegate OnChange() {
-		return OnChangeDelegate;
-	}
-
-protected:
-	/** Broadcasts whenever the data changes */
-	FChangedEventDelegate OnChangeDelegate;
-
-	void BroadcastChangedEvent()
-	{
-		OnChangeDelegate.Broadcast();
-	}
 };

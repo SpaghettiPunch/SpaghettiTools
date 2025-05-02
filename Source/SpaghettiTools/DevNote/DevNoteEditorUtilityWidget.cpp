@@ -1,10 +1,10 @@
 
 #include "DevNoteEditorUtilityWidget.h"
-#include "DevNoteEditorUtilityWidgetItem.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/PanelWidget.h"
 #include "DevNoteDataAsset.h"
+#include "DevNoteEditorUtilityWidgetItem.h"
 #include "Modules/ModuleManager.h"
 #include "Templates/Casts.h"
 
@@ -20,7 +20,7 @@ void UDevNoteEditorUtilityWidget::SynchronizeProperties()
 
 void UDevNoteEditorUtilityWidget::UpdateWidget()
 {
-	if (!NotesList)
+	if (!NotesList || !NoteItemWidgetClass)
 	{
 		return;
 	}
@@ -38,14 +38,11 @@ void UDevNoteEditorUtilityWidget::UpdateWidget()
 		{
 			if (UDevNoteDataAsset* NoteDataAsset = CastChecked<UDevNoteDataAsset>(AssetObject))
 			{
-				if (NoteItemWidgetClass)
+				UDevNoteEditorUtilityWidgetItem* ItemWidget = CreateWidget<UDevNoteEditorUtilityWidgetItem>(GetWorld(), NoteItemWidgetClass, Asset.AssetName);
+				if (ItemWidget)
 				{
-					UUserWidget* NewWidget = CreateWidget(GetWorld(), NoteItemWidgetClass);
-					if (UDevNoteEditorUtilityWidgetItem* ItemWidget = CastChecked<UDevNoteEditorUtilityWidgetItem>(NewWidget)) 
-					{
-						ItemWidget->NoteData = NoteDataAsset;
-						NotesList->AddChild(NewWidget);
-					}
+					ItemWidget->NoteData = NoteDataAsset;
+					NotesList->AddChild(ItemWidget);
 				}
 			}
 		}

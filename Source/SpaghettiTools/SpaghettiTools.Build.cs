@@ -7,6 +7,7 @@ public class SpaghettiTools : ModuleRules
 	public SpaghettiTools(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+		OptimizeCode = CodeOptimization.InNonDebugBuilds;
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
@@ -47,6 +48,7 @@ public class SpaghettiTools : ModuleRules
 				"RHI",
 				"Blutility",
 				"ScriptableEditorWidgets",
+				"CommonUI"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
