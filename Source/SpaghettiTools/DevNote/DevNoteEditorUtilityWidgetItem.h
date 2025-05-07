@@ -22,9 +22,6 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Note, meta=(BindWidget))
 	TObjectPtr<class UCommonVisibilitySwitcher> VisibilitySwitcher;
 
-	UPROPERTY(BlueprintReadOnly, Category = Note, meta=(BindWidget))
-	TObjectPtr<class UImage> TestIconImage;
-
 	UFUNCTION(BlueprintCallable)
 	void SetEditMode(bool bMode);
 

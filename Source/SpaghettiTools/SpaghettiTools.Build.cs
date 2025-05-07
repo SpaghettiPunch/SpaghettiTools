@@ -40,6 +40,7 @@ public class SpaghettiTools : ModuleRules
 				"EditorFramework",
 				"UnrealEd",
 				"ToolMenus",
+				"Core",
 				"CoreUObject",
 				"Engine",
 				"Slate",
@@ -48,7 +49,8 @@ public class SpaghettiTools : ModuleRules
 				"RHI",
 				"Blutility",
 				"ScriptableEditorWidgets",
-				"CommonUI"
+				"CommonUI",
+				"AssetDefinition",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

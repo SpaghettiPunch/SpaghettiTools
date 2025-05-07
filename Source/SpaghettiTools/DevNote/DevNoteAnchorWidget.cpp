@@ -14,14 +14,14 @@ void UDevNoteAnchorWidget::SynchronizeProperties()
 
 void UDevNoteAnchorWidget::SetNoteData(TObjectPtr<class UDevNoteDataAsset> NewNoteData)
 {
-	if (!NewNoteData)
+	if (!NewNoteData || NoteData == NewNoteData)
 	{
 		return;
 	}
 
 	if (NoteData)
 	{
-		// NoteData->OnChange().RemoveDynamic(this, &ThisClass::UpdateWidgetState);
+		NoteData->OnChange.RemoveDynamic(this, &ThisClass::UpdateWidgetState);
 	}
 
 	NoteData = NewNoteData;
