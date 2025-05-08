@@ -1,6 +1,7 @@
 #include "SlateBrushAssetImage.h"
 #include "Slate/SlateBrushAsset.h"
 
+
 void USlateBrushAssetImage::ResetBrush()
 {
 	if (SlateBrushAsset.IsValid())

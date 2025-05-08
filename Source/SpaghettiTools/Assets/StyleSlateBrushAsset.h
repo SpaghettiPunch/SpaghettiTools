@@ -1,18 +1,19 @@
 #pragma once
 
 #include "SlateBrushAsset.h"
+#include "UObject/Class.h"
 #include "UObject/ObjectMacros.h"
-#include "ImageSlateBrushAsset.generated.h"
+#include "StyleSlateBrushAsset.generated.h"
 
 UCLASS(BlueprintType)
-class SPAGHETTITOOLS_API UImageSlateBrushAsset : public USlateBrushAsset
+class SPAGHETTITOOLS_API UStyleSlateBrushAsset : public USlateBrushAsset
 {
 	GENERATED_BODY()
 
 public:
 	/* */
-	UPROPERTY(EditAnywhere, Category = Brush)
-	FString ResourceName;
+	UPROPERTY(EditAnywhere, Category = Brush, meta=(GetOptions="GetStyleBrushKeys"))
+	FName StyleBrushKey;
 
 #if WITH_EDITOR
 	//~ Begin UObject Interface
@@ -20,7 +21,11 @@ public:
 	virtual void PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent) override;
 
 protected:
-	void InitBrushFromResource();
+	void InitBrushFromStyle();
+
+	UFUNCTION()
+	TArray<FName> GetStyleBrushKeys() const;
+
 
 	//~ End UObject Interface
 #endif
