@@ -3,6 +3,7 @@
 #include "Components/TextBlock.h"
 #include "Styling/AppStyle.h"
 #include "Styling/SlateBrush.h"
+#include "Styling/StarshipCoreStyle.h"
 
 class WidgetUtilities {
 public:
@@ -26,8 +27,15 @@ public:
 
 	static TSet<FName> GetStyleBrushKeys()
 	{
-		TSet<FName> BrushKeys = TSet<FName>();
-		TSet<FName> Keys = FAppStyle::Get().GetStyleKeys();
+		TSet<FName> Keys; 
+
+		// Main editor style
+		Keys.Append(FAppStyle::Get().GetStyleKeys());
+		// CoreStyle - Styling/StarshipCoreStyle.h:30
+		Keys.Append(FStarshipCoreStyle::GetCoreStyle().GetStyleKeys());
+		
+		// Filter out keys only for brushes
+		TSet<FName> BrushKeys;
 		for (const FName Key : Keys)
 		{
 			const struct FSlateBrush* Brush = FAppStyle::Get().GetBrush(Key);

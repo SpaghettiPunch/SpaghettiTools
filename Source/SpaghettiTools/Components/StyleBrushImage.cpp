@@ -1,14 +1,24 @@
 #include "StyleBrushImage.h"
 #include "Brushes/SlateImageBrush.h"
 #include "SpaghettiTools/Util/WidgetUtilities.h"
-
+#include "Styling/SlateBrush.h"
 
 void UStyleBrushImage::ResetBrush()
 {
 	if (StyleBrushKey.IsValid())
 	{
-		auto StyleBrush = FAppStyle::Get().GetBrush(StyleBrushKey);
-		SetBrush(FSlateImageBrush(StyleBrush->GetResourceName(), StyleBrush->GetImageSize(), StyleBrush->TintColor, StyleBrush->GetTiling(), StyleBrush->GetImageType()));
+		const FSlateBrush* StyleBrush = FAppStyle::Get().GetBrush(StyleBrushKey);
+
+		SetBrush(
+			FSlateImageBrush(
+				StyleBrush->GetResourceName(),
+				StyleBrush->GetImageSize(),
+				StyleBrush->TintColor,
+				StyleBrush->GetTiling(),
+				StyleBrush->GetImageType()
+			)
+		);
+
 	}
 }
 
@@ -16,9 +26,14 @@ void UStyleBrushImage::PostEditChangeProperty(FPropertyChangedEvent& PropertyCha
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	if (PropertyChangedEvent.Property->GetFName() == GET_MEMBER_NAME_CHECKED(UStyleBrushImage, StyleBrushKey))
+	const FName Property = PropertyChangedEvent.Property->GetFName();
+	if (Property == GET_MEMBER_NAME_CHECKED(UStyleBrushImage, StyleBrushKey))
 	{
 		ResetBrush();
+	}
+	else if (Property == TEXT("ResourceObject"))
+	{
+		StyleBrushKey = NAME_None;
 	}
 }
 

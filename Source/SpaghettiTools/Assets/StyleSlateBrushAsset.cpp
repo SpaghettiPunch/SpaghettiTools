@@ -2,9 +2,12 @@
 
 #include "StyleSlateBrushAsset.h"
 #include "Brushes/SlateImageBrush.h"
+#include "Logging/LogVerbosity.h"
 #include "Rendering/SlateRenderer.h"
 #include "SpaghettiTools/Util/WidgetUtilities.h"
+#include "Styling/AppStyle.h"
 #include "Styling/SlateBrush.h"
+#include "UObject/UnrealNames.h"
 
 #if WITH_EDITOR
 void UStyleSlateBrushAsset::PostLoad()
@@ -17,10 +20,14 @@ void UStyleSlateBrushAsset::PostEditChangeProperty(struct FPropertyChangedEvent&
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	FName Property = PropertyChangedEvent.MemberProperty->GetFName();
+	const FName Property = PropertyChangedEvent.Property->GetFName();
 	if (Property == GET_MEMBER_NAME_CHECKED(UStyleSlateBrushAsset, StyleBrushKey))
 	{
 		InitBrushFromStyle();
+	}
+	else if (Property == TEXT("ResourceObject"))
+	{
+		StyleBrushKey = NAME_None;
 	}
 }
 
@@ -28,8 +35,15 @@ void UStyleSlateBrushAsset::InitBrushFromStyle()
 {
 	if (!StyleBrushKey.IsNone())
 	{
-		auto StyleBrush = FAppStyle::Get().GetBrush(StyleBrushKey);
-		Brush = FSlateImageBrush(StyleBrush->GetResourceName(), Brush.GetImageSize(), Brush.TintColor, Brush.GetTiling(), Brush.GetImageType());
+		const FSlateBrush* StyleBrush = FAppStyle::Get().GetBrush(StyleBrushKey);
+
+		Brush = FSlateImageBrush(
+			StyleBrush->GetResourceName(),
+			Brush.GetImageSize(),
+			Brush.TintColor,
+			Brush.GetTiling(),
+			StyleBrush->GetImageType()
+		);
 	}
 }
 
