@@ -10,7 +10,8 @@
 #include "DevNote.generated.h"
 
 UCLASS()
-class SPAGHETTITOOLS_API ADevNote: public AActor
+
+class SPAGHETTITOOLS_API ADevNote : public AActor
 {
 	GENERATED_BODY()
 
@@ -26,10 +27,10 @@ public:
 	ADevNote();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
-    TObjectPtr<class UDevNoteDataAsset> NoteData;
+	TObjectPtr<class UDevNoteDataAsset> NoteData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
-    bool bAutoUpdateNoteContent;
+	bool bAutoUpdateNoteContent;
 
 	UFUNCTION(CallInEditor, Category = Note)
 	void UpdateWidgetState();
@@ -38,7 +39,14 @@ public:
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 	void OnConstruction(const FTransform& Transform) override;
 
-	class UBillboardComponent* GetSpriteComponent() const { return SpriteComponent; }
-	class UScalableWidgetComponent* GetWidgetComponent() const { return WidgetComponent; }
-#endif // WITH_EDITORONLY_DATA
+	class UBillboardComponent* GetSpriteComponent() const
+	{
+		return SpriteComponent;
+	}
+
+	class UScalableWidgetComponent* GetWidgetComponent() const
+	{
+		return WidgetComponent;
+	}
+#endif	  // WITH_EDITORONLY_DATA
 };

@@ -10,7 +10,12 @@ class FSpaghettiToolsCommands : public TCommands<FSpaghettiToolsCommands>
 public:
 
 	FSpaghettiToolsCommands()
-		: TCommands<FSpaghettiToolsCommands>(TEXT("SpaghettiTools"), NSLOCTEXT("Contexts", "SpaghettiTools", "SpaghettiTools Plugin"), NAME_None, FSpaghettiToolsStyle::GetStyleSetName())
+		: TCommands<FSpaghettiToolsCommands>(
+			  TEXT("SpaghettiTools"),
+			  NSLOCTEXT("Contexts", "SpaghettiTools", "SpaghettiTools Plugin"),
+			  NAME_None,
+			  FSpaghettiToolsStyle::GetStyleSetName()
+		  )
 	{
 	}
 
@@ -18,5 +23,5 @@ public:
 	virtual void RegisterCommands() override;
 
 public:
-	TSharedPtr< FUICommandInfo > OpenNotesWindow;
+	TSharedPtr<FUICommandInfo> OpenNotesWindow;
 };

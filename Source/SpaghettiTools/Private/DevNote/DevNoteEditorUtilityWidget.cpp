@@ -1,7 +1,7 @@
 
+#include "DevNote/DevNoteEditorUtilityWidget.h"
 #include "DevNote/DevNoteDataAsset.h"
 #include "DevNote/DevNoteEditorUtilityWidgetItem.h"
-#include "DevNote/DevNoteEditorUtilityWidget.h"
 
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Blueprint/UserWidget.h"
@@ -39,7 +39,11 @@ void UDevNoteEditorUtilityWidget::UpdateWidget()
 		{
 			if (UDevNoteDataAsset* NoteDataAsset = CastChecked<UDevNoteDataAsset>(AssetObject))
 			{
-				UDevNoteEditorUtilityWidgetItem* ItemWidget = CreateWidget<UDevNoteEditorUtilityWidgetItem>(GetWorld(), NoteItemWidgetClass, Asset.AssetName);
+				UDevNoteEditorUtilityWidgetItem* ItemWidget = CreateWidget<UDevNoteEditorUtilityWidgetItem>(
+					GetWorld(),
+					NoteItemWidgetClass,
+					Asset.AssetName
+				);
 				if (ItemWidget)
 				{
 					ItemWidget->NoteData = NoteDataAsset;

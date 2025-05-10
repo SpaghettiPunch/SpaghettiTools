@@ -5,6 +5,7 @@
 #include "ImageSlateBrushAsset.generated.h"
 
 UCLASS(BlueprintType)
+
 class SPAGHETTITOOLS_API UImageSlateBrushAsset : public USlateBrushAsset
 {
 	GENERATED_BODY()
@@ -17,7 +18,7 @@ public:
 #if WITH_EDITOR
 	//~ Begin UObject Interface
 	virtual void PostLoad() override;
-	virtual void PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent) override;
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 
 protected:
 	void InitBrushFromResource();

@@ -47,15 +47,15 @@ public:
 	FDevNoteData NoteData;
 
 	/** UObject Interface */
-	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override 
+	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override
 	{
 		Super::PostEditChangeProperty(PropertyChangedEvent);
 		OnChange.Broadcast();
 	}
 
-
 #if WITH_EDITORONLY_DATA
 	UFUNCTION(BlueprintCallable, Category = "Note Actions")
+
 	void SelectRelatedActors()
 	{
 		for (TSoftObjectPtr<AActor> RelatedActor : NoteData.RelatedActors)
@@ -68,11 +68,12 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = "Note Actions")
+
 	void MoveCameraToNote()
 	{
 		TArray<AActor*> ActorGroup = {};
 
-		for (TSoftObjectPtr<AActor> RelatedActor: NoteData.RelatedActors)
+		for (TSoftObjectPtr<AActor> RelatedActor : NoteData.RelatedActors)
 		{
 			if (RelatedActor.IsValid())
 			{

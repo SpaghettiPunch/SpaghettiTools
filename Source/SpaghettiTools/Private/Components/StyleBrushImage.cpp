@@ -1,6 +1,7 @@
 #include "Components/StyleBrushImage.h"
-#include "Brushes/SlateImageBrush.h"
 #include "Util/WidgetUtilities.h"
+
+#include "Brushes/SlateImageBrush.h"
 #include "Styling/SlateBrush.h"
 
 void UStyleBrushImage::ResetBrush()
@@ -9,15 +10,13 @@ void UStyleBrushImage::ResetBrush()
 	{
 		const FSlateBrush* StyleBrush = FAppStyle::Get().GetBrush(StyleBrushKey);
 
-		SetBrush(
-			FSlateImageBrush(
-				StyleBrush->GetResourceName(),
-				StyleBrush->GetImageSize(),
-				StyleBrush->TintColor,
-				StyleBrush->GetTiling(),
-				StyleBrush->GetImageType()
-			)
-		);
+		SetBrush(FSlateImageBrush(
+			StyleBrush->GetResourceName(),
+			StyleBrush->GetImageSize(),
+			StyleBrush->TintColor,
+			StyleBrush->GetTiling(),
+			StyleBrush->GetImageType()
+		));
 	}
 }
 

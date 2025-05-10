@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Assets/StyleSlateBrushAsset.h"
+#include "Util/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Logging/LogVerbosity.h"
 #include "Rendering/SlateRenderer.h"
-#include "Util/WidgetUtilities.h"
 #include "Styling/AppStyle.h"
 #include "Styling/SlateBrush.h"
 #include "UObject/UnrealNames.h"

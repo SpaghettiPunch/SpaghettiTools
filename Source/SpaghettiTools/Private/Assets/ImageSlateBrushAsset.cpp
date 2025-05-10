@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Assets/ImageSlateBrushAsset.h"
+
 #include "Brushes/SlateImageBrush.h"
-#include "Rendering/SlateRenderer.h"
 #include "Misc/Paths.h"
+#include "Rendering/SlateRenderer.h"
 
 #if WITH_EDITOR
 void UImageSlateBrushAsset::PostLoad()
@@ -12,7 +13,7 @@ void UImageSlateBrushAsset::PostLoad()
 	Super::PostLoad();
 }
 
-void UImageSlateBrushAsset::PostEditChangeProperty( struct FPropertyChangedEvent& PropertyChangedEvent)
+void UImageSlateBrushAsset::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
@@ -23,7 +24,8 @@ void UImageSlateBrushAsset::PostEditChangeProperty( struct FPropertyChangedEvent
 	}
 }
 
-void UImageSlateBrushAsset::InitBrushFromResource() {
+void UImageSlateBrushAsset::InitBrushFromResource()
+{
 	if (!ResourceName.IsEmpty() && Brush.ImageSize.X != 0.0f && Brush.ImageSize.Y != 0.0f)
 	{
 		// Create a new brush so that it resolves the path automaticall

@@ -3,11 +3,10 @@
 #include "Util/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
-#include "Components/DetailsView.h"
 #include "CommonVisibilitySwitcher.h"
+#include "Components/DetailsView.h"
 #include "Interfaces/IPluginManager.h"
 #include "Styling/SlateStyleRegistry.h"
-
 
 void UDevNoteEditorUtilityWidgetItem::SynchronizeProperties()
 {

@@ -5,7 +5,8 @@
 #include "Styling/SlateBrush.h"
 #include "Styling/StarshipCoreStyle.h"
 
-class WidgetUtilities {
+class WidgetUtilities
+{
 public:
 	static void UpdateTextBlock(TObjectPtr<UTextBlock> TextBlock, FString Text)
 	{
@@ -27,13 +28,13 @@ public:
 
 	static TSet<FName> GetStyleBrushKeys()
 	{
-		TSet<FName> Keys; 
+		TSet<FName> Keys;
 
 		// Main editor style
 		Keys.Append(FAppStyle::Get().GetStyleKeys());
 		// CoreStyle - Styling/StarshipCoreStyle.h:30
 		Keys.Append(FStarshipCoreStyle::GetCoreStyle().GetStyleKeys());
-		
+
 		// Filter out keys only for brushes
 		TSet<FName> BrushKeys;
 		for (const FName Key : Keys)

@@ -1,16 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SpaghettiTools.h"
-#include "ComponentVisualizer.h"
-#include "Editor/UnrealEdEngine.h"
-#include "SpaghettiToolsStyle.h"
 #include "SpaghettiToolsCommands.h"
-#include "LevelEditor.h"
-#include "UnrealEdGlobals.h"
-#include "Widgets/Docking/SDockTab.h"
-#include "Widgets/Layout/SBox.h"
-#include "Widgets/Text/STextBlock.h"
-#include "ToolMenus.h"
+#include "SpaghettiToolsStyle.h"
+
+#include "Editor/UnrealEdEngine.h"
 
 static const FName NotesTabName("Notes");
 
@@ -19,25 +13,26 @@ static const FName NotesTabName("Notes");
 void FSpaghettiToolsModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	
+
 	FSpaghettiToolsStyle::Initialize();
 	FSpaghettiToolsStyle::ReloadTextures();
 
 	FSpaghettiToolsCommands::Register();
-	
+
 	PluginCommands = MakeShareable(new FUICommandList);
 
 	PluginCommands->MapAction(
 		FSpaghettiToolsCommands::Get().OpenNotesWindow,
 		FExecuteAction::CreateRaw(this, &FSpaghettiToolsModule::NotesButtonClicked),
-		FCanExecuteAction());
+		FCanExecuteAction()
+	);
 
 	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FSpaghettiToolsModule::RegisterMenus));
-	
-	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(NotesTabName, FOnSpawnTab::CreateRaw(this, &FSpaghettiToolsModule::OnSpawnPluginTab))
+
+	FGlobalTabmanager::Get()
+		->RegisterNomadTabSpawner(NotesTabName, FOnSpawnTab::CreateRaw(this, &FSpaghettiToolsModule::OnSpawnPluginTab))
 		.SetDisplayName(LOCTEXT("FSpaghettiToolsNotesTabTitle", "Notes"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
-
 }
 
 void FSpaghettiToolsModule::ShutdownModule()
@@ -54,7 +49,6 @@ void FSpaghettiToolsModule::ShutdownModule()
 	FSpaghettiToolsCommands::Unregister();
 
 	FGlobalTabmanager::Get()->UnregisterNomadTabSpawner(NotesTabName);
-
 }
 
 TSharedRef<SDockTab> FSpaghettiToolsModule::OnSpawnPluginTab(const FSpawnTabArgs& SpawnTabArgs)
@@ -63,20 +57,11 @@ TSharedRef<SDockTab> FSpaghettiToolsModule::OnSpawnPluginTab(const FSpawnTabArgs
 		LOCTEXT("WindowWidgetText", "Add code to {0} in {1} to override this window's contents"),
 		FText::FromString(TEXT("FSpaghettiToolsModule::OnSpawnPluginTab")),
 		FText::FromString(TEXT("SpaghettiTools.cpp"))
-		);
+	);
 
-	return SNew(SDockTab)
-		.TabRole(ETabRole::NomadTab)
-		[
-			// Put your tab content here!
-			SNew(SBox)
-			.HAlign(HAlign_Center)
-			.VAlign(VAlign_Center)
-			[
-				SNew(STextBlock)
-				.Text(WidgetText)
-			]
-		];
+	return SNew(SDockTab).TabRole(ETabRole::NomadTab)[
+		// Put your tab content here!
+		SNew(SBox).HAlign(HAlign_Center).VAlign(VAlign_Center)[SNew(STextBlock).Text(WidgetText)]];
 }
 
 void FSpaghettiToolsModule::NotesButtonClicked()
@@ -99,5 +84,5 @@ void FSpaghettiToolsModule::RegisterMenus()
 }
 
 #undef LOCTEXT_NAMESPACE
-	
+
 IMPLEMENT_MODULE(FSpaghettiToolsModule, SpaghettiTools)

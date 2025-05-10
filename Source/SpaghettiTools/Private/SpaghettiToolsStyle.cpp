@@ -1,11 +1,11 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "SpaghettiToolsStyle.h"
-#include "Styling/SlateStyleRegistry.h"
 #include "Framework/Application/SlateApplication.h"
-#include "Slate/SlateGameResources.h"
 #include "Interfaces/IPluginManager.h"
+#include "Slate/SlateGameResources.h"
 #include "Styling/SlateStyleMacros.h"
+#include "Styling/SlateStyleRegistry.h"
 
 #define RootToContentDir Style->RootToContentDir
 
@@ -36,9 +36,9 @@ FName FSpaghettiToolsStyle::GetStyleSetName()
 const FVector2D Icon16x16(16.0f, 16.0f);
 const FVector2D Icon20x20(20.0f, 20.0f);
 
-TSharedRef< FSlateStyleSet > FSpaghettiToolsStyle::Create()
+TSharedRef<FSlateStyleSet> FSpaghettiToolsStyle::Create()
 {
-	TSharedRef< FSlateStyleSet > Style = MakeShareable(new FSlateStyleSet("SpaghettiToolsStyle"));
+	TSharedRef<FSlateStyleSet> Style = MakeShareable(new FSlateStyleSet("SpaghettiToolsStyle"));
 	Style->SetContentRoot(IPluginManager::Get().FindPlugin("SpaghettiTools")->GetBaseDir() / TEXT("Resources"));
 
 	Style->Set("SpaghettiTools.OpenPluginWindow", new IMAGE_BRUSH_SVG(TEXT("PlaceholderButtonIcon"), Icon20x20));

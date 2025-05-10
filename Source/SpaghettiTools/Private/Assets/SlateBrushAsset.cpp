@@ -7,6 +7,6 @@ void USlateBrushAsset::PostLoad()
 
 	if (Brush.Tint_DEPRECATED != FLinearColor::White)
 	{
-		Brush.TintColor = FSlateColor( Brush.Tint_DEPRECATED );
+		Brush.TintColor = FSlateColor(Brush.Tint_DEPRECATED);
 	}
 }
