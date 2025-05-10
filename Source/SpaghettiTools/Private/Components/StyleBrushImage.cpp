@@ -1,6 +1,6 @@
-#include "StyleBrushImage.h"
+#include "Components/StyleBrushImage.h"
 #include "Brushes/SlateImageBrush.h"
-#include "SpaghettiTools/Util/WidgetUtilities.h"
+#include "Util/WidgetUtilities.h"
 #include "Styling/SlateBrush.h"
 
 void UStyleBrushImage::ResetBrush()
@@ -18,7 +18,6 @@ void UStyleBrushImage::ResetBrush()
 				StyleBrush->GetImageType()
 			)
 		);
-
 	}
 }
 

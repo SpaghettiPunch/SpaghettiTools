@@ -1,7 +1,8 @@
-#include "DevNote.h"
-#include "SpaghettiTools/ScalableWidgetComponent.h"
+#include "DevNote/DevNote.h"
+#include "DevNote/DevNoteAnchorWidget.h"
+#include "ScalableWidgetComponent.h"
+
 #include "Components/BillboardComponent.h"
-#include "DevNoteAnchorWidget.h"
 #include "UObject/ConstructorHelpers.h"
 
 ADevNote::ADevNote()

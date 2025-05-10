@@ -2,7 +2,6 @@
 #pragma once
 
 #include "Components/Image.h"
-#include "UObject/SoftObjectPtr.h"
 #include "StyleBrushImage.generated.h"
 
 /**
@@ -25,8 +24,6 @@ public:
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 
 protected:
-
 	UFUNCTION()
 	TArray<FName> GetStyleBrushKeys() const;
-
 };

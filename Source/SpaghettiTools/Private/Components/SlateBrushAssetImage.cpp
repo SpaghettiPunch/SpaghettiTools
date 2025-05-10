@@ -1,4 +1,4 @@
-#include "SlateBrushAssetImage.h"
+#include "Components/SlateBrushAssetImage.h"
 #include "Slate/SlateBrushAsset.h"
 
 

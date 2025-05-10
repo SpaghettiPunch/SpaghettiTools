@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ImageSlateBrushAsset.h"
+#include "Assets/ImageSlateBrushAsset.h"
 #include "Brushes/SlateImageBrush.h"
 #include "Rendering/SlateRenderer.h"
 #include "Misc/Paths.h"

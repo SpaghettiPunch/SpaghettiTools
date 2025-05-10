@@ -1,10 +1,11 @@
 
-#include "DevNoteEditorUtilityWidget.h"
+#include "DevNote/DevNoteDataAsset.h"
+#include "DevNote/DevNoteEditorUtilityWidgetItem.h"
+#include "DevNote/DevNoteEditorUtilityWidget.h"
+
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/PanelWidget.h"
-#include "DevNoteDataAsset.h"
-#include "DevNoteEditorUtilityWidgetItem.h"
 #include "Modules/ModuleManager.h"
 #include "Templates/Casts.h"
 

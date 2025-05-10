@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Components/Image.h"
 #include "EditorUtilityWidget.h"
 #include "UObject/ObjectPtr.h"
 #include "DevNoteEditorUtilityWidgetItem.generated.h"

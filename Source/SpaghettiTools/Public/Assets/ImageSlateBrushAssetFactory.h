@@ -26,7 +26,6 @@ class SPAGHETTITOOLS_API UImageSlateBrushAssetFactory : public UFactory
 	{
 		return NSLOCTEXT("SlateImageBrushAssetFactoryDescription", "SlateImageBrushAssetFactoryDescription", "Slate Image Brush");
 	}
-	// virtual bool ConfigureProperties() override;
 
 	virtual UObject* FactoryCreateNew(UClass* Class,UObject* InParent,FName Name,EObjectFlags Flags,UObject* Context,FFeedbackContext* Warn) override
 	{

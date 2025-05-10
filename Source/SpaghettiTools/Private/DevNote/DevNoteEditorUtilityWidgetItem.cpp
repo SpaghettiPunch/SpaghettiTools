@@ -1,6 +1,6 @@
-#include "DevNoteEditorUtilityWidgetItem.h"
-#include "DevNoteDataAsset.h"
-#include "SpaghettiTools/Util/WidgetUtilities.h"
+#include "DevNote/DevNoteEditorUtilityWidgetItem.h"
+#include "DevNote/DevNoteDataAsset.h"
+#include "Util/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Components/DetailsView.h"

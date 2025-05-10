@@ -1,6 +1,6 @@
-#include "DevNoteAnchorWidget.h"
-#include "DevNoteDataAsset.h"
-#include "SpaghettiTools/Util/WidgetUtilities.h"
+#include "DevNote/DevNoteAnchorWidget.h"
+#include "DevNote/DevNoteDataAsset.h"
+#include "Util/WidgetUtilities.h"
 
 void UDevNoteAnchorWidget::SynchronizeProperties()
 {
