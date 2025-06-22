@@ -1,7 +1,10 @@
 #include "ScalableWidgetComponent.h"
 
+#include "Math/MathFwd.h"
 #include "Slate/WidgetRenderer.h"
 #include "Widgets/SVirtualWindow.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogScalableWidgetComponent, Log, All);
 
 /* Copy of WidgetComponent method, but uses DrawScale property variable instad of constant */
 void UScalableWidgetComponent::DrawWidgetToRenderTarget(float DeltaTime)
@@ -60,6 +63,20 @@ void UScalableWidgetComponent::DrawWidgetToRenderTarget(float DeltaTime)
 		}
 	}
 
+	if (CurrentDrawSize.X > MaxAllowedDrawSize || CurrentDrawSize.Y > MaxAllowedDrawSize)
+	{
+		FVector2D NewCurrentDrawSize = CurrentDrawSize;
+		NewCurrentDrawSize /= DrawScale;
+
+		const float NewDrawScale = FMath::Min((float)MaxAllowedDrawSize / NewCurrentDrawSize.X, (float)MaxAllowedDrawSize / NewCurrentDrawSize.Y);
+
+		CurrentDrawSize = NewCurrentDrawSize.IntPoint() * NewDrawScale;
+		DrawScale = NewDrawScale;
+		UpdateDrawScale();
+
+		UE_LOG(LogScalableWidgetComponent, Warning, TEXT("Render target too large, scaling down to maximum value (new Draw Scale: %f)"), DrawScale);
+	}
+
 	if (CurrentDrawSize != PreviousDrawSize)
 	{
 		if (bHasValidSize)
@@ -115,8 +132,14 @@ void UScalableWidgetComponent::DrawWidgetToRenderTarget(float DeltaTime)
 
 void UScalableWidgetComponent::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	UpdateDrawScale();
+}
+
+void UScalableWidgetComponent::UpdateDrawScale()
+{
 	if (bAutoCompensateWidgetScale)
 	{
 		SetRelativeScale3D(FVector(1.0f / DrawScale));
 	}
-};
+}
