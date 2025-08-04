@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Assets/StyleSlateBrushAsset.h"
-#include "Util/WidgetUtilities.h"
+#include "UMG/StyleSlateBrushAsset.h"
+#include "UMG/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Logging/LogVerbosity.h"

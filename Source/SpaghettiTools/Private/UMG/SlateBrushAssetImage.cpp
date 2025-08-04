@@ -1,4 +1,4 @@
-#include "Components/SlateBrushAssetImage.h"
+#include "UMG/SlateBrushAssetImage.h"
 #include "Slate/SlateBrushAsset.h"
 
 void USlateBrushAssetImage::ResetBrush()

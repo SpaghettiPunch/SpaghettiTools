@@ -1,5 +1,5 @@
-#include "Components/StyleBrushImage.h"
-#include "Util/WidgetUtilities.h"
+#include "UMG/StyleBrushImage.h"
+#include "UMG/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "Styling/SlateBrush.h"

@@ -1,6 +1,6 @@
 #include "DevNote/DevNoteAnchorWidget.h"
 #include "DevNote/DevNoteDataAsset.h"
-#include "Util/WidgetUtilities.h"
+#include "UMG/WidgetUtilities.h"
 
 void UDevNoteAnchorWidget::SynchronizeProperties()
 {

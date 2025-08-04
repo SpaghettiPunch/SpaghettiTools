@@ -1,6 +1,6 @@
 #include "DevNote/DevNoteEditorUtilityWidgetItem.h"
 #include "DevNote/DevNoteDataAsset.h"
-#include "Util/WidgetUtilities.h"
+#include "UMG/WidgetUtilities.h"
 
 #include "Brushes/SlateImageBrush.h"
 #include "CommonVisibilitySwitcher.h"

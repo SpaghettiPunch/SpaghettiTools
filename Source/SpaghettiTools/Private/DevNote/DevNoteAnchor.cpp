@@ -1,6 +1,6 @@
 #include "DevNote/DevNoteAnchor.h"
 #include "DevNote/DevNoteAnchorWidget.h"
-#include "ScalableWidgetComponent.h"
+#include "UMG/ScalableWidgetComponent.h"
 
 #include "Components/BillboardComponent.h"
 #include "UObject/ConstructorHelpers.h"

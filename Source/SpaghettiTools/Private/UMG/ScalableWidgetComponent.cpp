@@ -1,4 +1,4 @@
-#include "ScalableWidgetComponent.h"
+#include "UMG/ScalableWidgetComponent.h"
 
 #include "Math/MathFwd.h"
 #include "Slate/WidgetRenderer.h"

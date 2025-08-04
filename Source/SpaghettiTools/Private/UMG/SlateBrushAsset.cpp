@@ -1,4 +1,4 @@
-#include "Assets/SlateBrushAsset.h"
+#include "UMG/SlateBrushAsset.h"
 
 /* Copied from SlateBrushAsset.h since it is a MinimalAPI class */
 void USlateBrushAsset::PostLoad()
