@@ -1,11 +1,11 @@
-#include "DevNote/DevNote.h"
+#include "DevNote/DevNoteAnchor.h"
 #include "DevNote/DevNoteAnchorWidget.h"
 #include "ScalableWidgetComponent.h"
 
 #include "Components/BillboardComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
-ADevNote::ADevNote()
+ADevNoteAnchor::ADevNoteAnchor()
 {
 	USceneComponent* SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComp"));
 	RootComponent = SceneComponent;
@@ -27,8 +27,6 @@ ADevNote::ADevNote()
 
 			FConstructorStatics()
 				: NoteTextureObject(TEXT("/Engine/EditorResources/S_Note"))
-				// , NoteUserWidget(LoadClass<UUserWidget>(NULL,
-				// 	TEXT("WidgetBlueprint'/SpaghettiTools/Notes/WP_WorldDevNote.WP_WorldDevNote_C'")))
 				, ID_Notes(TEXT("Notes"))
 				, NAME_Notes(NSLOCTEXT("SpriteCategory", "Notes", "Notes"))
 			{
@@ -66,7 +64,7 @@ ADevNote::ADevNote()
 	SetCanBeDamaged(false);
 }
 
-void ADevNote::OnConstruction(const FTransform& Transform)
+void ADevNoteAnchor::OnConstruction(const FTransform& Transform)
 {
 	Super::OnConstruction(Transform);
 
@@ -76,7 +74,7 @@ void ADevNote::OnConstruction(const FTransform& Transform)
 	}
 }
 
-void ADevNote::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+void ADevNoteAnchor::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
@@ -86,7 +84,7 @@ void ADevNote::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEven
 	}
 }
 
-void ADevNote::UpdateWidgetState()
+void ADevNoteAnchor::UpdateWidgetState()
 {
 	if (WidgetComponent)
 	{

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "Containers/Array.h"
-#include "DevNote.h"
+#include "DevNoteAnchor.h"
 #include "Editor.h"
 #include "Engine/DataAsset.h"
 #include "UObject/SoftObjectPtr.h"
@@ -19,7 +19,7 @@ struct FDevNoteData
 	FString Text;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSoftObjectPtr<ADevNote> Anchor;
+	TSoftObjectPtr<ADevNoteAnchor> Anchor;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TSoftObjectPtr<AActor>> RelatedActors;
@@ -54,8 +54,7 @@ public:
 	}
 
 #if WITH_EDITORONLY_DATA
-	UFUNCTION(BlueprintCallable, Category = "Note Actions")
-
+	UFUNCTION(CallInEditor, BlueprintCallable, Category = "Note Actions")
 	void SelectRelatedActors()
 	{
 		for (TSoftObjectPtr<AActor> RelatedActor : NoteData.RelatedActors)
@@ -67,8 +66,7 @@ public:
 		}
 	}
 
-	UFUNCTION(BlueprintCallable, Category = "Note Actions")
-
+	UFUNCTION(CallInEditor, BlueprintCallable, Category = "Note Actions")
 	void MoveCameraToNote()
 	{
 		TArray<AActor*> ActorGroup = {};

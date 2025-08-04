@@ -7,24 +7,27 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "DevNote.generated.h"
+#include "DevNoteAnchor.generated.h"
 
-UCLASS()
+class UBillboardComponent;
+class UScalableWidgetComponent;
 
-class SPAGHETTITOOLS_API ADevNote : public AActor
+UCLASS(BlueprintType, Blueprintable)
+
+class SPAGHETTITOOLS_API ADevNoteAnchor : public AActor
 {
 	GENERATED_BODY()
 
 #if WITH_EDITORONLY_DATA
 protected:
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<class UBillboardComponent> SpriteComponent;
+	TObjectPtr<UBillboardComponent> SpriteComponent;
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<class UScalableWidgetComponent> WidgetComponent;
+	TObjectPtr<UScalableWidgetComponent> WidgetComponent;
 
 public:
-	ADevNote();
+	ADevNoteAnchor();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Note)
 	TObjectPtr<class UDevNoteDataAsset> NoteData;
@@ -39,12 +42,12 @@ public:
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 	void OnConstruction(const FTransform& Transform) override;
 
-	class UBillboardComponent* GetSpriteComponent() const
+	UBillboardComponent* GetSpriteComponent() const
 	{
 		return SpriteComponent;
 	}
 
-	class UScalableWidgetComponent* GetWidgetComponent() const
+	UScalableWidgetComponent* GetWidgetComponent() const
 	{
 		return WidgetComponent;
 	}

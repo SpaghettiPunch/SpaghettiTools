@@ -3,8 +3,11 @@
 #include "SpaghettiTools.h"
 #include "SpaghettiToolsCommands.h"
 #include "SpaghettiToolsStyle.h"
+#include "DevNote/DevNoteActorFactory.h"
 
 #include "Editor/UnrealEdEngine.h"
+#include "Subsystems/PlacementSubsystem.h"
+#include "UnrealEdGlobals.h"
 
 static const FName NotesTabName("Notes");
 
@@ -33,6 +36,11 @@ void FSpaghettiToolsModule::StartupModule()
 		->RegisterNomadTabSpawner(NotesTabName, FOnSpawnTab::CreateRaw(this, &FSpaghettiToolsModule::OnSpawnPluginTab))
 		.SetDisplayName(LOCTEXT("FSpaghettiToolsNotesTabTitle", "Notes"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
+
+	if(GUnrealEd)
+	{
+		GUnrealEd->GetEditorSubsystem<UPlacementSubsystem>()->RegisterAssetFactory(NewObject<UDevNoteActorFactory>());
+	}
 }
 
 void FSpaghettiToolsModule::ShutdownModule()
